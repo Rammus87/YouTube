@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>廠商發案</title>
+    <link rel="stylesheet" href="/mcn.css">
+</head>
+<%- include('header') %>
+<body>
+    <div class="container">
+        <h1>廠商發案</h1>
+    <% if (username) { %>
+    <button id="showform" class="showform" onclick="showform()">我要接案</button>
+    <% } else { %>
+        <li class="showform">
+          <a href="login">登入/註冊</a>
+        </li>                    
+    <% } %>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <form action="/mcnpost" method="POST" id="postform">
+                <label for="title">標題：</label>
+                <input type="text" id="title" name="title" required><br><br>
+                <select name="location" id="location" placeholder="請填寫發案地點" required>
+                    <option value="">請選擇地點</option>
+                    <option value="台北">台北</option>
+                    <option value="新北">新北</option>
+                    <option value="桃園">桃園</option>
+                    <option value="新竹">新竹</option>
+                    <option value="台中">台中</option>
+                    <option value="台南">台南</option>
+                    <option value="高雄">高雄</option>
+                </select>
+                <label for="content">內容：</label><br>
+                <textarea id="content" name="content" rows="4" required></textarea><br><br>
+                <button type="submit">提交</button>
+            </form>
+        </div>
+    </div>
+        <ul class="mcnlist">
+            <% projects.reverse().forEach(function(project){  %>
+                <li class="mcnitem">
+                    <div class="mcnheader">
+                        <img src="/uploads/<%= project.avatar %>" alt="avatar">
+                        <h3><%= project.username %></h3>
+                    </div>
+                    <div class="mcncontent">
+                            <p class="small">位置: <%= project.location %></p>
+                            <h2><%= project.title %></h2>
+                            <div class="contenttext">
+                                <p><%= project.content %></p>
+                                <p class="time">時間:<%= (project.created_at) %></p>
+                            </div>
+                    </div>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+    <script>
+        function showform() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'block';
+        }
+
+        function closeform() {
+            modal.style.display = 'none';
+        }
+
+        //跳出提示
+        const checkyoutuber = document.getElementById('postform');
+        const ulElement = document.querySelector('ul');
+
+        checkyoutuber.addEventListener('submit', async (event)=>{
+            event.preventDefault();
+
+             //獲取值
+            const title = document.getElementById('title').value;
+            const location = document.getElementById('location').value;
+            const content = document.getElementById('content').value;
+
+            const response = await fetch('/mcnpost',{
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/json',
+                },
+                body: JSON.stringify({title, location, content})
+            });
+            
+            const data = await response.json();
+
+            if(data.success){
+                alert(data.message);
+                
+                window.location.href = '/mcn';
+            }else{
+                alert(data.message);
+            }
+        })
+    </script>
+</body>
+<%- include('footer') %>
+</html>

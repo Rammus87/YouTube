@@ -1,0 +1,53 @@
+body{
+    background-color: antiquewhite;
+}
+
+.container {
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: aliceblue;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+input,select, button {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+input:focus, button:focus, select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+input:hover, select:hover{
+    background-color: #ccc;
+}
+
+#creationtypeLabel,
+#creationtype {
+    display: none;
+}

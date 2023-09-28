@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>網紅接案</title>
+    <link rel="stylesheet" href="/youtuber.css">
+</head>
+<%- include('header') %>
+<body>
+    <div class="container">
+        <h1>網紅接案</h1>
+    <% if (username) { %>
+    <button id="showform" class="showform" onclick="showform()">我要接案</button>
+    <% } else { %>
+        <li class="showform">
+          <a href="login">登入/註冊</a>
+        </li>                    
+    <% } %>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <form action="/youtuberpost" method="POST" id="postform">
+                <label for="title">標題：</label>
+                <input type="text" id="title" name="title" required><br><br>
+                <label for="sex">粉絲數量：</label>
+                <select name="fanscount" id="fanscount" placeholder="請填寫粉絲數量" required>
+                    <option value="">請選擇數量</option>
+                    <option value="1000以下">1000以下</option>
+                    <option value="1001~4999">1001~4999</option>
+                    <option value="5000~1萬">5000~1萬</option>
+                    <option value="1萬~5萬">1萬~5萬</option>
+                    <option value="5萬~10萬">5萬~10萬</option>
+                    <option value="10萬到100萬">10萬到100萬</option>
+                    <option value="100萬以上">100萬以上</option>
+                </select>
+                <select name="location" id="location" placeholder="請填寫接案地點" required>
+                    <option value="">請選擇地點</option>
+                    <option value="台北">台北</option>
+                    <option value="新北">新北</option>
+                    <option value="桃園">桃園</option>
+                    <option value="新竹">新竹</option>
+                    <option value="台中">台中</option>
+                    <option value="台南">台南</option>
+                    <option value="高雄">高雄</option>
+                </select>
+                <label for="content">內容：</label><br>
+                <textarea id="content" name="content" rows="4" required></textarea><br><br>
+                <button type="submit">提交</button>
+            </form>
+        </div>
+    </div>
+    <ul class="postlist">
+        <% projects.reverse().forEach(function(project) { %>        
+            <li class="postitem">
+                <div class="postheader">
+                    <img src="/uploads/<%= project.avatar %>" alt="avatar">
+                    <h3><%= project.username %></h3>
+                </div>
+                <div class="postcontent">
+                    <div class="postdetails">
+                        <p class="small">粉絲數量：<%= project.fanscount %></p> 
+                        <% if (project.creationtype) { %>
+                            <p class="small">類型:<%= project.creationtype %></p> 
+                        <% } else { %>
+                            <p class="small">類型：無</p>                  
+                        <% } %>                     
+                        <p class="small">位置:<%= project.location %></p>  
+                    </div>
+                    <h2><%= project.title %></h2>
+                    <div class="contenttext">
+                        <p><%= project.content %></p>  
+                        <p class="time">時間:<%= (project.created_at) %></p> 
+                    </div>                 
+                </div>
+            </li>
+        <% }); %>
+    </ul>
+    </div>
+    <script>
+        function showform() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'block';
+        }
+
+        function closeform() {
+            modal.style.display = 'none';
+        }
+
+        //跳出提示
+        const checkyoutuber = document.getElementById('postform');
+        const ulElement = document.querySelector('ul');
+
+        checkyoutuber.addEventListener('submit', async (event)=>{
+            event.preventDefault();
+
+            //獲取值
+            const title = document.getElementById('title').value;
+            const fanscount = document.getElementById('fanscount').value;
+            const location = document.getElementById('location').value;
+            const content = document.getElementById('content').value;
+
+            const response = await fetch('/youtuberpost',{
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/json',
+                },
+                body: JSON.stringify({title, fanscount, location, content})
+            });
+            
+            const data = await response.json();
+
+            if(data.success){
+                alert(data.message);
+                
+                window.location.href = '/youtuber';
+            }else{
+                alert(data.message);
+            }
+        })
+    </script>
+</body>
+<%- include('footer') %>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新增用戶帳號</title>
+    <link rel="stylesheet" href="/createuser.css">
+</head>
+<body>
+    <header>
+        <%- include('header') %>
+    </header>
+    <div class="container">
+        <form action="/register" method="post" id="createuser">
+            <label for="username">用戶名：</label>
+            <input type="text" name="username" id="username" placeholder="請設定用戶名" required>
+            <label for="password">請設定密碼：</label>
+            <input type="text" name="password" id="password" placeholder="請設定密碼" required>
+            <label for="email">email：</label>
+            <input type="text" name="email" id="email" placeholder="請填寫信箱" required>
+            <label for="sex">性別：</label>
+            <select name="sex" id="sex" placeholder="請填寫性別" required>
+                <option value="">請選擇性別</option>
+                <option value="male">男</option>
+                <option value="female">女</option>
+            </select>
+            <label for="usertype">用戶類型：</label>
+            <select name="usertype" id="usertype" placeholder="請選擇用戶類型" required>
+                <option value="">請選擇用戶類型</option>
+                <option value="creator">創作者</option>
+                <option value="mcn">廠商</option>
+            </select>
+            <label for="creationtype" id="creationtypeLabel">作品類型：</label>
+            <select name="creationtype" id="creationtype" placeholder="請選擇作品類型">
+                <option value="">請選擇作品類型</option>
+                <option value="food">美食</option>
+                <option value="vlog">Vlog</option>
+                <option value="game">遊戲</option>
+                <option value="unboxing">開箱</option>
+                <option value="funny">搞笑</option>
+                <option value="know">知識口播</option>
+            </select>
+            <button type="submit">註冊</button>
+        </form>
+    </div>
+    <script>
+    //創建成功跳轉
+    const register = document.getElementById('createuser');
+
+    register.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const email = document.getElementById('email').value;
+        const sex = document.getElementById('sex').value;
+        const usertype = document.getElementById('usertype').value;
+        const creationtype = document.getElementById('creationtype').value;
+
+        const response = await fetch('/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password, email, sex, usertype, creationtype }),
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            alert(data.message);
+            window.location.href = '/login';
+        } else {
+            alert(data.message);
+        }
+    });
+    //如果為創作者則出現作品類型
+    document.getElementById('usertype').addEventListener('change', function() {
+    var creationtypeLabel = document.getElementById('creationtypeLabel');
+    var creationtype = document.getElementById('creationtype');
+
+        if (this.value === 'creator') {
+            creationtypeLabel.style.display = 'block'; 
+            creationtype.style.display = 'block'; 
+        } else {
+            creationtypeLabel.style.display = 'none'; 
+            creationtype.style.display = 'none'; 
+        }
+    });
+    </script>
+</body>
+<%- include('footer') %>
+</html>

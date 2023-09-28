@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自媒體銀行</title>
+    <link rel="stylesheet" href="/style.css">
+    <%- include('header') %>
+</head>
+<body>
+    <div class="container">
+        <h1>自媒體交流區</h1>
+        <% if (username) { %>
+         <li class="listitem">
+           <img src="user/avatar" alt="avatar"> 
+           <a href="user/profile"><%= username %></a>
+         </li>
+         <form action="/postMessage" method="post" >
+             <input type="text" name="title" placeholder="標題" required>
+             <textarea name="message" placeholder="内容" required></textarea>
+             <button type="submit">發表留言</button>
+         </form>
+       <% } else { %>
+         <li class="showform">
+           <a href="login">登入/註冊</a>
+         </li>                    
+       <% } %>
+         <ul>
+             <% messages.reverse().forEach(message => { %>
+                 <li class="message">
+                     <div class="user-info">
+                         <img src="/uploads/<%= message.avatar %>" alt="avatar">
+                         <h3><%= message.username %></h3>
+                     </div>
+                     <div class="message-content">
+                         <h2><%= message.title %></h2>
+                         <p><%= message.message %></p>
+                         <p><%= message.created_at %></p>
+                     </div>
+                     <ul>
+                         <% comments.forEach(comment => { %>
+                             <% if (comment.message_id === message.id) { %>
+                                 <li>
+                                     <h3><%= comment.username %></h3>
+                                     <p><%= comment.comment %></p>
+                                     <p><%= comment.created_at %></p>
+                                 </li>
+                             <% } %>
+                         <% }) %>
+                     </ul>
+                 </li>
+             <% }) %>
+         </ul>
+    </div>
+</body>
+<%- include('footer') %>
+</html>

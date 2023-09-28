@@ -1,0 +1,36 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/header.css">
+</head>
+<header>
+  <div class="wrapper">
+    <nav class="navbar">
+       <div class="navbarlift">
+           <h1 class="logo">自媒體人力銀行</h1>
+           <ul>
+              <li class="listitem"><a href="/">自媒體交流區</a></li>
+              <li class="listitem"><a href="/youtuber">網紅接案</a></li>
+              <li class="listitem"><a href="/mcn">廠家發案</a></li>
+              <li class="listitem"><a href="/store">自媒體商店</a></li>
+            </ul>
+        </div>
+          <ul class="navbarright">
+            <ul class="navbarright">
+              <% if (username) { %>
+              <li class="listitem">
+                <a href="/user/profile">歡迎你 <%= username %></a>
+              </li>
+              <li>
+                <img src="/user/avatar" alt="avatar">
+              </li>
+              <% } else { %>
+              <li class="listitem">
+                <a href="login">登入/註冊</a>
+              </li>                    
+              <% } %>
+              </ul>
+            </ul>
+        </nav>
+    </div>
+</header>

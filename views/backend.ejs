@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會員中心</title>
+    <link rel="stylesheet" href="/createuser.css">
+</head>
+<body>
+    <%- include('header') %>
+    <div class="container">
+        <p>歡迎，<%= user.username %></p>
+        <form id="updateProfileForm" action="/updateProfile" method="post" enctype="multipart/form-data">
+            <label for="nickname">暱稱：</label>
+            <input type="text" id="nickname" name="nickname" value="<%= user.nickname %>" required>
+            <label for="sex">性別：</label>
+            <label>
+                <input type="radio" id="male" name="sex" value="male" <%= user.sex === 'male' ? 'checked' : '' %>>男
+                <input type="radio" id="female" name="sex" value="female" <%= user.sex === 'female' ? 'checked' : '' %>>女
+           </label>
+            <label for="usertype">創作類型：</label>
+            <select id="usertype" name="usertype">
+                <option value="creator" <%= user.usertype === 'creator' ? 'selected' : '' %>>創作者</option>
+                <option value="mcn" <%= user.usertype === 'mcn' ? 'selected' : '' %>>廠商</option>
+            </select>
+            <label for="avatar">大頭貼：</label>
+            <input type="file" id="avatar" name="avatar"><br>
+            <button type="submit">保存</button>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const updateProfileForm = document.getElementById('updateProfileForm');
+
+            updateProfileForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const formData = new FormData(this);
+
+                fetch('/updateProfile', {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('用户资料已更新');
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('发生错误：', error);
+                    alert('服务器出错，请稍后重试');
+                });
+            });
+        });
+    </script>
+</body>
+<%- include('footer') %>
+</html>
