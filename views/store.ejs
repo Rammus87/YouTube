@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>自媒體商店</title>
-    <link rel="stylesheet" href="store.css">
+    <link rel="stylesheet" href="/store.css">
 </head>
+<%- include("header") %>
 <body>
     <div class="container">
         <h2>自媒體商店</h2>
         <ul class="product-grid">
             <li class="product">
                 <h3>Rode wireless go II</h3>
-                <img src="/public/img/shopping.webp" alt="商品1">
+                <img src="/img/shopping.webp" alt="商品1">
                 <div class="productlist">
                     <p class="price">$100</p>
                     <p>麥克風</p>
@@ -21,34 +22,7 @@
             </li>
             <li class="product">
                 <h3>Rode wireless go II</h3>
-                <img src="/public/img/shopping.webp" alt="商品1">
-                <div class="productlist">
-                    <p class="price">$100</p>
-                    <p>麥克風</p>
-                </div>
-                <p>支援一對二&可預錄,可同時錄製兩個聲源,續航力長達7小時鋰電池</p>
-            </li>
-            <li class="product">
-                <h3>Rode wireless go II</h3>
-                <img src="/public/img/shopping.webp" alt="商品1">
-                <div class="productlist">
-                    <p class="price">$100</p>
-                    <p>麥克風</p>
-                </div>
-                <p>支援一對二&可預錄,可同時錄製兩個聲源,續航力長達7小時鋰電池</p>
-            </li>
-            <li class="product">
-                <h3>Rode wireless go II</h3>
-                <img src="/public/img/shopping.webp" alt="商品1">
-                <div class="productlist">
-                    <p class="price">$100</p>
-                    <p>麥克風</p>
-                </div>
-                <p>支援一對二&可預錄,可同時錄製兩個聲源,續航力長達7小時鋰電池</p>
-            </li>
-            <li class="product">
-                <h3>Rode wireless go II</h3>
-                <img src="/public/img/shopping.webp" alt="商品1">
+                <img class="itemimg" src="/public/img/shopping.webp" alt="商品1">
                 <div class="productlist">
                     <p class="price">$100</p>
                     <p>麥克風</p>
@@ -75,5 +49,6 @@
             </li>
         </ul>
     </div>
+    <%- include("footer") %>
 </body>
 </html>

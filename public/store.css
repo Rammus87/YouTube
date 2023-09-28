@@ -1,8 +1,21 @@
 /* 基本樣式 */
+ul li{
+    list-style-type: none;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+}
+
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h2{
+    text-align: center;
 }
 
 .product-grid {
@@ -12,18 +25,32 @@ body {
     padding: 20px;
 }
 
-/* 商品卡片樣式 */
+/* 商品卡片 */
 .product {
+    height: 40vh;
     border: 1px solid #ccc;
-    padding: 10px;
+    padding: 5px;
     text-align: center;
+    border-radius: 20px;
 }
 
 .product img {
     max-width: 100%;
+    height: 40%;
+}
+
+.productlist{
+    display: flex;
+    justify-content: row;
+    align-items: center;
 }
 
 .price {
     font-weight: bold;
     color: #333;
 }
+
+.productlist p{
+    margin-left: 20px;
+}
+
