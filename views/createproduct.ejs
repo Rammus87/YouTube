@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新增商品</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <div class="container">
+        <form action="/postcreateproduct" method="post" id="postcreateproduct" enctype="multipart/form-data">
+            <label for="productname">商品名：</label>
+            <input type="text" name="productname" id="productname" placeholder="請設定商品名" required>
+            <label for="price">請設定價格：</label>
+            <input type="text" name="price" id="price" placeholder="請設定價格" required>
+            <label for="email">類型：</label>
+            <select name="type" id="type" placeholder="請選擇類型" required>
+                <option value="">請選擇類型</option>
+                <option value="麥克風">麥克鳳</option>
+                <option value="相機">相機</option>
+                <option value="其他配件">其他配件</option>
+            </select>
+            <input type="text" name="description" id="description" placeholder="請寫商品描述" required>
+            <label for="productimg">商品照片：</label>
+            <input type="file" id="productimg" name="productimg"><br>
+            <button type="submit">提交</button>
+        </form>
+    </div>
+    <script>
+        const form = document.getElementById('postcreateproduct');
+    
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault(); 
+
+            try {
+                const formData = new FormData(form);
+                const response = await fetch('/postcreateproduct', {
+                    method: 'POST',
+                    body: formData,
+                });
+    
+                if (response.ok) {
+                    console.log("商品提交成功")
+                    alert("商品新增成功")
+                    window.location.href = '/productback';
+                } else {
+                    console.error('服務器狀態:', response.status);
+                }
+            } catch (error) {
+                console.error('錯誤:', error);
+            }
+        });
+    </script>
+    
+</body>
+</html>

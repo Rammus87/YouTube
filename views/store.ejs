@@ -11,42 +11,19 @@
     <div class="container">
         <h2>自媒體商店</h2>
         <ul class="product-grid">
+            <% products.forEach(function(product){  %>
             <li class="product">
-                <h3>Rode wireless go II</h3>
-                <img src="/img/shopping.webp" alt="商品1">
+                <h3><%= product.product_name %></h3>
+                <img src="/img/products/<%= product.image %>" alt="商品1">
                 <div class="productlist">
-                    <p class="price">$100</p>
-                    <p>麥克風</p>
+                    <p class="price"><%= product.price %></p>
+                    <p><%= product.type %></p>
+                    <button>加入購物車</button>
+                    <button>購買</button>
                 </div>
-                <p>支援一對二&可預錄,可同時錄製兩個聲源,續航力長達7小時鋰電池</p>
+                <p><%= product.description %></p>
             </li>
-            <li class="product">
-                <h3>Rode wireless go II</h3>
-                <img class="itemimg" src="/public/img/shopping.webp" alt="商品1">
-                <div class="productlist">
-                    <p class="price">$100</p>
-                    <p>麥克風</p>
-                </div>
-                <p>支援一對二&可預錄,可同時錄製兩個聲源,續航力長達7小時鋰電池</p>
-            </li>
-            <li class="product">
-                <h3>Rode wireless go II</h3>
-                <img src="/public/img/shopping.webp" alt="商品1">
-                <div class="productlist">
-                    <p class="price">$100</p>
-                    <p>麥克風</p>
-                </div>
-                <p>支援一對二&可預錄,可同時錄製兩個聲源,續航力長達7小時鋰電池</p>
-            </li>
-            <li class="product">
-                <h3>Rode wireless go II</h3>
-                <img src="/public/img/shopping.webp" alt="商品1">
-                <div class="productlist">
-                    <p class="price">$100</p>
-                    <p>麥克風</p>
-                </div>
-                <p>支援一對二&可預錄,可同時錄製兩個聲源,續航力長達7小時鋰電池</p>
-            </li>
+            <% }); %>
         </ul>
     </div>
     <%- include("footer") %>
