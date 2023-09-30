@@ -85,11 +85,10 @@ router.post('/register', async (req, res) => {
 
     try {
         const [results, fields] = await connection.query('INSERT INTO users (username, password, email, sex, usertype, creationtype) VALUES (?, ?, ?, ?, ?, ?)', [username, password, email, sex, usertype, creationtype]);
-
-        res.json({ success: true, message: '注册成功' });
+        res.json({ success: true, message: '註冊成功' });
     } catch (error) {
-        console.error('查询时出现错误：' + error);
-        res.status(500).json({ success: false, message: '服务器内部出现错误' });
+        console.error( error);
+        res.status(500).json({ success: false, message: '服務器內部出現錯誤' });
     }
 });
 

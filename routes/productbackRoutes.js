@@ -21,27 +21,17 @@ router.get('/productback', (req,res)=>{
     res.render('createproduct')
 })
 
-router.post('/postcreateproduct',uploadproductimg.single('productimg'),async(req,res)=>{
+
+router.post('/productback',uploadproductimg.single('productimg'),async(req,res)=>{
     const { productname, price, type, description  } = req.body;
     const productimgPath = req.file.filename;
 
-    const sql = 'INSERT INTO products (product_name, price, type, description, image) VALUES (?, ?, ?, ?, ?)';
-    const values = [productname, price, type, description, productimgPath];
     try {
-        await new Promise((resolve, reject) => {
-            connection.query(sql, values, (err, results) => {
-                if (err) {
-                    console.error(err); 
-                    return res.status(500).send('發生錯誤，無法新增商品');
-                } else {
-                    resolve(results);
-                }
-            });
-        });
-        res.redirect('/productback'); 
+        const [results, fields] = await connection.query('INSERT INTO products (product_name, price, type, description, image) VALUES (?, ?, ?, ?, ?)', [productname, price, type, description, productimgPath]);
+        res.json({ success: true, message: '商品提交成功' });
     } catch (error) {
         console.error(error);
-        res.status(500).send('發生錯誤，無法新增商品');
+        res.status(500).json({ success: false, message: '服務器內部出現錯誤' });
     }
 })
 

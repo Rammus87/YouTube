@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <form action="/postcreateproduct" method="post" id="postcreateproduct" enctype="multipart/form-data">
+        <form action="/productback" method="post" id="productback" enctype="multipart/form-data">
             <label for="productname">商品名：</label>
             <input type="text" name="productname" id="productname" placeholder="請設定商品名" required>
             <label for="price">請設定價格：</label>
@@ -27,24 +27,26 @@
         </form>
     </div>
     <script>
-        const form = document.getElementById('postcreateproduct');
+        const form = document.getElementById('productback');
     
         form.addEventListener('submit', async (event) => {
             event.preventDefault(); 
 
             try {
                 const formData = new FormData(form);
-                const response = await fetch('/postcreateproduct', {
+                const response = await fetch('/productback', {
                     method: 'POST',
                     body: formData,
                 });
+
+                const data = await response.json();
     
                 if (response.ok) {
                     console.log("商品提交成功")
-                    alert("商品新增成功")
+                    alert(data.message)
                     window.location.href = '/productback';
                 } else {
-                    console.error('服務器狀態:', response.status);
+                    alert(data.message)
                 }
             } catch (error) {
                 console.error('錯誤:', error);

@@ -67,6 +67,12 @@
             modal.style.display = 'none';
         }
 
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeform();
+            }
+        });
+
         //跳出提示
         const checkyoutuber = document.getElementById('postform');
         const ulElement = document.querySelector('ul');

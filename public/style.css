@@ -118,7 +118,8 @@ p {
     margin: 0 10px 10px 0;
 }
 
-.user-info img{
+.user-info img,
+.listitem img{
     margin-right: 10px;
     border-radius: 50%;
     height: 50px;
