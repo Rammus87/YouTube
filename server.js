@@ -26,6 +26,7 @@ const youtuberRoutes = require('./routes/youtuberRoutes');
 const mcnRoutes = require('./routes/mcnRoutes');
 const storeRoutes = require('./routes/storeRoutes')
 const productbackRoutes = require('./routes/productbackRoutes')
+const shoppingcartRoutes = require('./routes/shoppingcartRoutes')
 
 //使用路由
 app.use('/', indexRouter);
@@ -35,6 +36,7 @@ app.use('/', youtuberRoutes);
 app.use('/', mcnRoutes);
 app.use('/', storeRoutes);
 app.use('/', productbackRoutes);
+app.use('/', shoppingcartRoutes);
 
 app.use((err, req, res, next) => {
     console.log('Request URL:', req.url);
