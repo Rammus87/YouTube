@@ -18,12 +18,15 @@
           <ul class="navbarright">
             <ul class="navbarright">
               <% if (username) { %>
-              <li class="headeritem">
-                <a href="/user/profile">歡迎你 <%= username %></a>
-              </li>
-              <li>
-                <img class="useravatar" src="/user/avatar" alt="avatar">
-              </li>
+                <div class="userdrop">
+                  <p>歡迎你 <%= username %></p>
+                  <img class="useravatar" src="/user/avatar" alt="avatar">
+                  <div class="userdropcontent">
+                    <a href="/shoppingcart">購物車</a>
+                    <a href="/buy">購物清單</a>
+                    <a href="/user/profile">設定</a>
+                  </div>
+                </div>
               <% } else { %>
               <li class="listitem">
                 <a href="login">登入/註冊</a>

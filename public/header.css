@@ -31,7 +31,8 @@ body {
   display: flex;
 }
 
-.navbarlift ul li{
+.navbarlift ul li,
+.listitem{
   padding: 15px;
 }
 
@@ -43,6 +44,43 @@ body {
   text-decoration: none;
   color: white;
 }
+
+.userdrop {
+  display: flex; 
+  align-items: center; 
+}
+
+.userdrop p {
+  margin-right: 10px;
+  color: white;
+}
+
+.userdropcontent {
+  display: none; 
+  position: absolute;
+  top: 70px;
+  right: 10px;
+  background-color: #fff; 
+  min-width: 210px; 
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); 
+  z-index: 1; 
+}
+
+.userdrop:hover .userdropcontent {
+  display: block;
+}
+
+.userdropcontent a {
+  padding: 12px 16px;
+  text-decoration: none;
+  color: #333; 
+  display: block; 
+}
+
+.userdropcontent a:hover {
+  background-color: #f2f2f2; 
+}
+
 
 .navbarright {
   list-style: none;

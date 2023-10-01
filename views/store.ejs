@@ -12,14 +12,13 @@
         <h2>自媒體商店</h2>
         <ul class="product-grid">
             <% products.forEach(function(product){  %>
-            <li class="product" data-productid="1">
+            <li class="product" data-productid="<%= product.product_id %>">
                 <h3><%= product.product_name %></h3>
-                <img src="/img/products/<%= product.image %>" alt="商品1">
+                <img src="/img/products/<%= product.image %>" alt="商品">
                 <p class="price">價格:<%= product.price %></p>
                 <div class="productlist">
                     <p><%= product.type %></p>
                     <button class="addToCart">加入購物車</button>
-                    <button class="buy">購買</button>
                 </div>
                 <p><%= product.description %></p>
             </li>
@@ -39,6 +38,7 @@
                 const productElement = btn.closest('.product');
                 const productid = productElement.dataset.productid; 
                 const quantity = 1;
+                
                 fetch('/addToCart', {
                     method: 'POST',
                     headers: {
@@ -60,18 +60,6 @@
                 });
             });
         });
-
-        document.querySelectorAll('.buy').forEach((btn) => {
-            btn.addEventListener('click', () => {
-                if (!username) {
-                    // 如果用户未登录，弹出提示框
-                    alert('請先登入。');
-                    return; // 阻止购买操作
-                }
-                    // 購買操作
-            });
-        });
-
     </script>
 </body>
 </html>

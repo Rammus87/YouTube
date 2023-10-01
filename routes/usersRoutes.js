@@ -41,7 +41,6 @@ router.get('/user/avatar', (req, res) => {
         console.log('未有大頭貼')
         return res.sendFile(path.join(__dirname, '../public','img','DSC00084.JPG'));
     }
-    console.log('已有大頭貼')
     const avatarPath = path.join(__dirname, '../public', 'uploads', user.avatar);
     res.sendFile(avatarPath);
 });
@@ -105,11 +104,11 @@ router.post('/updateProfile', upload.single('avatar'), async (req, res) => {
             [nickname, sex, usertype, avatar, user.id]
         );
 
-        console.log('用户资料已更新');
-        user.avatar = avatar; // 更新用户 session 中的头像信息
+        console.log('個人資料已更新');
+        user.avatar = avatar; 
         res.json({ success: true, message: '用户资料已更新' });
     } catch (error) {
-        console.error('更新用户资料出错：' + error);
+        console.error('更新用戶資料出現錯誤：' + error);
         res.status(500).json({ success: false, message: '服务器内部出现错误' });
     }
 });

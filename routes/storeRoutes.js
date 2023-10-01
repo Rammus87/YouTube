@@ -5,7 +5,7 @@ const connection = require('../config/db');
 router.get('/store',async(req,res)=>{
     const username = req.session.user ? req.session.user.username : null;
     try {
-        const [results, fields] = await connection.query('SELECT product_name, price, type, description, image FROM products');
+        const [results, fields] = await connection.query('SELECT product_id, product_name, price, type, description, image FROM products');
         const products = results;
         res.render('store', { products, username });
     } catch (error) {
@@ -29,7 +29,7 @@ router.post('/addToCart', async (req, res) => {
             const updatedQuantity = existingCartItem[0].quantity + quantity;
             await connection.query(
                 'UPDATE shoppingcart SET quantity = ? WHERE user_id = ? AND product_id = ?',
-                [updatedQuantity, userIi, productid]
+                [updatedQuantity, userid, productid]
             );
         } else {
             // 如果商品不存在於購物車中，則插入新的資料
