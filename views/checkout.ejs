@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>結帳</title>
+    <link rel="stylesheet" href="checkout.css">
+</head>
+<%- include('header') %>
+<body>
+    <div class="container">
+        <h1>購物車</h1>
+        <section class="cart">
+            <ul>
+                <li>
+                    <img src="" alt="myproduct">
+                    <div class="product-info">
+                        <h3></h3>
+                        <p></p>
+                        <p></p>
+                    </div>
+                </li>
+            </ul>
+            <p>總計: <span id="totalprice">0</span> 元</p>
+        </section>
+        <section class="checkout">
+            <h2>結帳資訊</h2>
+            <form>
+                <label for="name">姓名：</label>
+                <input type="text" id="name" name="name" required>
+                <label for="address">地址：</label>
+                <input type="text" id="address" name="address" required>
+                <label for="payment">付款方式：</label>
+                <select id="payment" name="payment" required>
+                    <option value="credit">貨到付款</option>
+                    <option value="paypal">線上支付</option>
+                </select>
+                <button type="submit">提交訂單</button>
+            </form>
+        </section>
+    </div>
+    <footer>
+        <%- include('footer') %>
+    </footer>
+</body>
+</html>

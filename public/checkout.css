@@ -1,0 +1,17 @@
+label, input, select, button {
+    display: block;
+    margin-top: 20px;
+}
+
+ul{
+    list-style: none;
+}
+
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
