@@ -15,19 +15,20 @@
                 <li class="cartitem">
                     <img src="/img/products/<%= cartitem.image %>" alt="">
                     <h4><%= cartitem.product_name %></h4>
-                    <p>數量: <%= cartitem.quantity %></p>
-                    <p>單價: $<%= cartitem.price %></p>
+                    <p>數量: <button class="decrement">-</button>
+                            <span class="quantity"><%= cartitem.quantity %></span>
+                            <button class="increment">+</button></p>
+                    <p>價格: $<%= cartitem.price %></p>
                 </li>
             <% }) %>
         </ul>
         <div class="cartsummary">
 
             <p>總計: <span id="totalprice">0</span> 元</p>
-            <button id="checkout">結帳</button>
+            <a href="/checkout"><button id="checkout">結帳</button></a>
         </div>
     </div>
-    <script>
-        
+    <script> 
         const cartItems = <%- JSON.stringify(cartItems) %>;
 
         // 加總

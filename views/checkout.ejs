@@ -12,14 +12,16 @@
         <h1>購物車</h1>
         <section class="cart">
             <ul>
+                <% checkoutItems.forEach(function(checkout){ %>
                 <li>
-                    <img src="" alt="myproduct">
+                    <img src="/img/products/<%= checkout.image %>" alt="myproduct">
                     <div class="product-info">
-                        <h3></h3>
-                        <p></p>
-                        <p></p>
+                        <h3><%= checkout.product_name %></h3>
+                        <p>數量:<%= checkout.quantity %></p>
+                        <p>價格:<%= checkout.price %></p>
                     </div>
                 </li>
+                <% }) %>
             </ul>
             <p>總計: <span id="totalprice">0</span> 元</p>
         </section>
@@ -42,5 +44,23 @@
     <footer>
         <%- include('footer') %>
     </footer>
+    <script>
+            const checkoutItems = <%- JSON.stringify(checkoutItems) %>;
+
+            let totalPrice = 0;         
+            checkoutItems.forEach(function (checkout) {
+                const quantity = checkout.quantity;
+                const price = parseFloat(checkout.price); 
+                const itemTotal = quantity * price;
+                totalPrice += itemTotal;
+            });
+            
+            // 套進頁面
+            const totalpriceElement = document.getElementById("totalprice");
+            if (totalpriceElement) {
+                totalpriceElement.textContent = totalPrice.toFixed(2); 
+            }
+    </script>
+    
 </body>
 </html>
