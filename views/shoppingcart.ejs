@@ -15,9 +15,9 @@
                 <li class="cartitem">
                     <img src="/img/products/<%= cartitem.image %>" alt="">
                     <h4><%= cartitem.product_name %></h4>
-                    <p>數量: <button class="decrement">-</button>
+                    <p>數量:<button class="decrement" data-productid="<%= cartitem.product_id %>">-</button>
                             <span class="quantity"><%= cartitem.quantity %></span>
-                            <button class="increment">+</button></p>
+                            <button class="increment" data-productid="<%= cartitem.product_id %>">+</button></p>
                     <p>價格: $<%= cartitem.price %></p>
                 </li>
             <% }) %>
@@ -42,6 +42,55 @@
         const totalpriceEl = document.getElementById('totalprice');
         totalpriceEl.textContent = totalPrice.toFixed(2);
 
+        //更新購物車數量
+        document.addEventListener('DOMContentLoaded', () => {
+            const decrementButtons = document.querySelectorAll('.decrement');
+            const incrementButtons = document.querySelectorAll('.increment');
+
+            decrementButtons.forEach(button => {
+                button.addEventListener('click', async () => {
+                    const productId = button.getAttribute('data-productid');
+                    const quantityElement = button.nextElementSibling;
+                    const currentQuantity = parseInt(quantityElement.textContent);
+
+                    if (currentQuantity > 1) {
+                        const updatedQuantity = currentQuantity - 1;
+                        quantityElement.textContent = updatedQuantity;
+                        //發送到後端
+                        await updateQuantitydb(productId, updatedQuantity);
+                    }
+                });
+            });
+
+            incrementButtons.forEach(button => {
+                button.addEventListener('click', async () => {
+                    const productId = button.getAttribute('data-productid');
+                    const quantityElement = button.previousElementSibling;
+                    const currentQuantity = parseInt(quantityElement.textContent);
+                
+                    const updatedQuantity = currentQuantity + 1;
+                    quantityElement.textContent = updatedQuantity;
+                
+                    // 發送到後端
+                    await updateQuantitydb(productId, updatedQuantity);
+                });
+            });
+
+            async function updateQuantitydb(productId, quantity) {
+                try {
+                    //發送opst請求回後端
+                    await fetch('/updateQuantity', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ productId, quantity }),
+                    });
+                } catch (error) {
+                    console.error('更新購物車數量錯誤:', error);
+                }
+            }
+        });     
     </script>
 </body>
 <%- include('footer') %>

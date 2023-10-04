@@ -45,21 +45,23 @@
         <%- include('footer') %>
     </footer>
     <script>
-            const checkoutItems = <%- JSON.stringify(checkoutItems) %>;
+        const checkoutItems = <%- JSON.stringify(checkoutItems) %>;
 
-            let totalPrice = 0;         
-            checkoutItems.forEach(function (checkout) {
-                const quantity = checkout.quantity;
-                const price = parseFloat(checkout.price); 
-                const itemTotal = quantity * price;
-                totalPrice += itemTotal;
-            });
+        let totalPrice = 0;         
+        checkoutItems.forEach(function (checkout) {
+            const quantity = checkout.quantity;
+            const price = parseFloat(checkout.price); 
+            const itemTotal = quantity * price;
+            totalPrice += itemTotal;
+        });
             
-            // 套進頁面
-            const totalpriceElement = document.getElementById("totalprice");
-            if (totalpriceElement) {
-                totalpriceElement.textContent = totalPrice.toFixed(2); 
-            }
+        // 套進頁面
+        const totalpriceElement = document.getElementById("totalprice");
+        if (totalpriceElement) {
+            totalpriceElement.textContent = totalPrice.toFixed(2); 
+        }
+        //數量
+        
     </script>
     
 </body>
