@@ -18,7 +18,8 @@
                     <p>數量:<button class="decrement" data-productid="<%= cartitem.product_id %>">-</button>
                             <span class="quantity"><%= cartitem.quantity %></span>
                             <button class="increment" data-productid="<%= cartitem.product_id %>">+</button></p>
-                    <p>價格: $<%= cartitem.price %></p>
+                    <p>單價: $<%= cartitem.price %></p>
+                    <p>合計: $<span id="itemtotal"><%= (cartitem.price * cartitem.quantity) %></span></p>
                 </li>
             <% }) %>
         </ul>
@@ -33,13 +34,19 @@
 
         // 加總
         let totalPrice = 0;
+
         cartItems.forEach(function (cartitem) {
             const itemPrice = cartitem.price * cartitem.quantity;
             totalPrice += itemPrice;
         });
+        cartItems.forEach(function(cartitem){
+            const itemtotal = cartitem.price * cartitem.quantity;
+        })
 
         // 更新頁面
+        const itemtotalEl = document.getElementById('itemtotal')
         const totalpriceEl = document.getElementById('totalprice');
+        itemtotalEl.textContent = itemtotal;
         totalpriceEl.textContent = totalPrice.toFixed(2);
 
         //更新購物車數量
@@ -70,7 +77,6 @@
                 
                     const updatedQuantity = currentQuantity + 1;
                     quantityElement.textContent = updatedQuantity;
-                
                     // 發送到後端
                     await updateQuantitydb(productId, updatedQuantity);
                 });
@@ -79,13 +85,13 @@
             async function updateQuantitydb(productId, quantity) {
                 try {
                     //發送opst請求回後端
-                    await fetch('/updateQuantity', {
+                    await fetch('/addquantity', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({ productId, quantity }),
-                    });
+                    })
                 } catch (error) {
                     console.error('更新購物車數量錯誤:', error);
                 }

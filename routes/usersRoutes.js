@@ -106,7 +106,7 @@ router.post('/updateProfile', upload.single('avatar'), async (req, res) => {
 
         console.log('個人資料已更新');
         user.avatar = avatar; 
-        res.json({ success: true, message: '用户资料已更新' });
+        res.json({ success: true, message: '個人資料已更新' });
     } catch (error) {
         console.error('更新用戶資料出現錯誤：' + error);
         res.status(500).json({ success: false, message: '服务器内部出现错误' });
