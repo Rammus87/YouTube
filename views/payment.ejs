@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>購物清單</title>
+    <link rel="stylesheet" href="/payment.css">
+</head>
+<body>
+    <div class="container">
+        <h1>購物清單</h1>
+        <ul>
+            <% ordersItem.forEach(function(item){ %>
+                <li>
+                    <h3><%= item.order_date %></h3>
+                    <p>內容:<%= item.order_name %></p>
+                    <p>價格: <%= item.order_price %> 元</p>
+                    <p>狀態: <%= item.status %></p>
+                </li>
+            <% }) %>
+            <h1>總計：</h1>
+        </ul>
+    </div>
+</body>
+</html>
