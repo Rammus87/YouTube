@@ -19,7 +19,7 @@
                             <span class="quantity"><%= cartitem.quantity %></span>
                             <button class="increment" data-productid="<%= cartitem.product_id %>">+</button></p>
                     <p>單價: $<%= cartitem.price %></p>
-                    <p>合計: $<span id="itemtotal"><%= (cartitem.price * cartitem.quantity) %></span></p>
+                    <p>合計: $<span class="itemtotal" >0</span></p>
                 </li>
             <% }) %>
         </ul>
@@ -30,24 +30,25 @@
         </div>
     </div>
     <script> 
-        const cartItems = <%- JSON.stringify(cartItems) %>;
-
-        // 加總
-        let totalPrice = 0;
-
-        cartItems.forEach(function (cartitem) {
-            const itemPrice = cartitem.price * cartitem.quantity;
-            totalPrice += itemPrice;
-        });
-        cartItems.forEach(function(cartitem){
-            const itemtotal = cartitem.price * cartitem.quantity;
-        })
+        let cartItems = <%- JSON.stringify(cartItems) %>;
 
         // 更新頁面
-        const itemtotalEl = document.getElementById('itemtotal')
         const totalpriceEl = document.getElementById('totalprice');
-        itemtotalEl.textContent = itemtotal;
-        totalpriceEl.textContent = totalPrice.toFixed(2);
+
+        function updatePage() {
+            const itemtotalEl = document.querySelectorAll('.itemtotal');
+            let totalPrice = 0;
+
+            cartItems.forEach(function (cartitem, index) {
+                const itemtotal = cartitem.price * cartitem.quantity;
+                itemtotalEl[index].textContent = itemtotal;
+                totalPrice += itemtotal;
+                console.log(cartitem.quantity)
+            });
+            const totalpriceEl = document.getElementById('totalprice');
+            totalpriceEl.textContent = totalPrice;
+        }
+        updatePage();
 
         //更新購物車數量
         document.addEventListener('DOMContentLoaded', () => {
@@ -65,6 +66,7 @@
                         quantityElement.textContent = updatedQuantity;
                         //發送到後端
                         await updateQuantitydb(productId, updatedQuantity);
+                        updatePage();
                     }
                 });
             });
@@ -79,6 +81,7 @@
                     quantityElement.textContent = updatedQuantity;
                     // 發送到後端
                     await updateQuantitydb(productId, updatedQuantity);
+                    updatePage();
                 });
             });
 
@@ -91,7 +94,13 @@
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({ productId, quantity }),
-                    })
+                    });
+                    const response = await fetch('/getcartdata');
+                    if (response.ok) {
+                        const updatedCartData = await response.json();
+                        cartItems = updatedCartData; // 更新 cartItems
+                        updatePage(); // 调用 updatePage 来更新页面
+                    }
                 } catch (error) {
                     console.error('更新購物車數量錯誤:', error);
                 }

@@ -18,7 +18,7 @@
                     <div class="product-info">
                         <h3><%= checkout.product_name %></h3>
                         <p>數量:<%= checkout.quantity %></p>
-                        <p>價格:<%= checkout.price %></p>
+                        <p>價格:<%= checkout.price * checkout.quantity %></p>
                     </div>
                 </li>
                 <% }) %>
@@ -45,7 +45,7 @@
         <%- include('footer') %>
     </footer>
     <script>
-        const checkoutItems = <%- JSON.stringify(checkoutItems) %>;
+        let checkoutItems = <%- JSON.stringify(checkoutItems) %>;
 
         let totalPrice = 0;         
         checkoutItems.forEach(function (checkout) {

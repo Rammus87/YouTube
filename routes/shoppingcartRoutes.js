@@ -38,5 +38,16 @@ router.post('/addquantity',async(req, res)=>{
     }
 });
 
+router.get('/getcartdata', async (req, res) => {
+    try {
+        const user = req.session.user;
+        const [cartItems] = await connection.query(
+            `SELECT shoppingcart.quantity, shoppingcart.product_id, products.product_name, products.price, products.image FROM shoppingcart JOIN products ON shoppingcart.product_id = products.product_id WHERE shoppingcart.user_id = ?`,[user.id])
+        res.json(cartItems);
+    } catch (error) {
+        console.error('購物車資料庫錯誤:', error);
+        res.status(500).json({ error: '物車資料庫錯誤' });
+    }
+});
 
 module.exports = router;
