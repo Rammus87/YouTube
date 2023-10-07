@@ -114,5 +114,16 @@ router.post('/updateProfile', upload.single('avatar'), async (req, res) => {
     }
 });
 
+//登出功能
+router.get('/logout',(req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.error('登出時發生錯誤:', err);
+        } else {
+            res.redirect('/'); 
+        }
+    });
+});
+
 
 module.exports = router;

@@ -15,10 +15,10 @@
             <li class="product" data-productid="<%= product.product_id %>">
                 <h3><%= product.product_name %></h3>
                 <img src="/img/products/<%= product.image %>" alt="商品">
-                <p class="price">價格:<%= product.price %></p>
                 <div class="productlist">
-                    <p>類型：<%= product.type %></p>
                     <button class="addToCart">加入購物車</button>
+                    <p class="price">價格:<%= product.price %></p>
+                    <p>類型：<%= product.type %></p>
                 </div>
                 <p><%= product.description %></p>
             </li>

@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
     background-color: white;
@@ -17,24 +17,17 @@ body {
 .postlist {
     list-style: none;
     padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
 }
 
 .postlist li {
-    flex: 0 0 calc(30% - 20px);
-    flex-direction: column; 
-    height: 330px;
-    display: flex;
-    align-items: flex-start;
     padding: 20px;
     margin-right:15px;
     border: 1px solid #ccc;
     margin-bottom: 20px;
-    background-color: lightcoral;
+    background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
+    height: 40vh;
 }
 
 .postheader {
@@ -53,21 +46,14 @@ body {
 .postheader h3{
     font-size: 18px;
     margin: 0;
-}
-
-.postcontent {
-    flex: 1;
-}
-
-.postcontent h2 {
-    font-size: 18px;
-    color: #007BFF;
+    color: blue;
 }
 
 .postdetails {
+    width: 50%;
     font-size: 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .smalltext {
@@ -76,12 +62,12 @@ body {
 }
 
 .contenttext {
-    font-size: 16px;
     margin: 0;
+    height: 60%;
 }
 
 .contenttext p{
-    color: white;
+    color: black;
 }
 
 .time {

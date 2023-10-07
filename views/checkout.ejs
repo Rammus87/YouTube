@@ -60,7 +60,15 @@
         if (totalpriceElement) {
             totalpriceElement.textContent = totalPrice.toFixed(2); 
         }
-        //數量
+        
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault(); // 阻止表單的預設提交行為
+
+            alert('感謝購買,已為您清空購物車');
+            this.submit();
+        });
+
+
         
     </script>
     

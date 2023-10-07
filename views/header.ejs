@@ -25,6 +25,7 @@
                     <a href="/shoppingcart">購物車</a>
                     <a href="/payment">購物清單</a>
                     <a href="/user/profile">設定</a>
+                    <a id="logoutBtn" href="#">登出</a>
                   </div>
                 </div>
               <% } else { %>
@@ -36,4 +37,16 @@
             </ul>
         </nav>
     </div>
+    <script>
+      const logoutBtn = document.getElementById('logoutBtn');
+      logoutBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const confirmLogout = confirm('確定要登出嗎？');
+        if (confirmLogout) {
+          window.location.href = '/logout';
+        }
+      });
+
+    </script>
 </header>

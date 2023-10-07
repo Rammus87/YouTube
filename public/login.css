@@ -3,6 +3,11 @@ body{
     margin: 0;
 }
 
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    height: 70vh;
+}
 
 #main{
     max-width: 400px;
@@ -46,4 +51,8 @@ button:hover {
 span{
     color: #007bff;
     cursor: pointer;
+}
+
+h6 a {
+    color: blue;
 }

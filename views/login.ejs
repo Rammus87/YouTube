@@ -8,15 +8,17 @@
 </head>
 <body>
     <%- include('header') %>
-    <div id="main">
-        <form action="/login" method="post" id="loginform">
-            <label for="username">帳號</label>
-            <input type="text" id="username" name="username" placeholder="請輸入帳號" required>
-            <label for="password">密碼</label>
-            <input type="password" id="password" name="password" placeholder="請輸入密碼" required>
-            <button type="submit">登入</button>
-        </form>
-        <h6 class="create">還沒有帳號？ <a href="/register">點擊我</a>註冊</h6>
+    <div class="container">
+        <div id="main">
+            <form action="/login" method="post" id="loginform">
+                <label for="username">帳號</label>
+                <input type="text" id="username" name="username" placeholder="請輸入帳號" required>
+                <label for="password">密碼</label>
+                <input type="password" id="password" name="password" placeholder="請輸入密碼" required>
+                <button type="submit">登入</button>
+            </form>
+            <h6 class="create">還沒有帳號？ <a href="/register">點擊我</a>註冊</h6>
+        </div>
     </div>
     <script>
         const checkaccount = document.getElementById('loginform');

@@ -55,8 +55,6 @@
                 <div class="postheader">
                     <img src="/uploads/<%= project.avatar %>" alt="avatar">
                     <h3><%= project.username %></h3>
-                </div>
-                <div class="postcontent">
                     <div class="postdetails">
                         <p class="small">粉絲數量：<%= project.fanscount %></p> 
                         <% if (project.creationtype) { %>
@@ -66,11 +64,13 @@
                         <% } %>                     
                         <p class="small">位置:<%= project.location %></p>  
                     </div>
+                </div>
+                <div class="contenttext">
                     <h2><%= project.title %></h2>
-                    <div class="contenttext">
-                        <p><%= project.content %></p>  
-                        <p class="time">時間:<%= (project.created_at) %></p> 
-                    </div>                 
+                    <p><%= project.content %></p>  
+                </div>                 
+                <div>
+                    <p class="time">時間:<%= (project.created_at) %></p> 
                 </div>
             </li>
         <% }); %>

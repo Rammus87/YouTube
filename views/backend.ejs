@@ -44,14 +44,14 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        alert('用户资料已更新');
+                        alert('用戶資料已更新');
                     } else {
                         alert(data.message);
                     }
                 })
                 .catch(error => {
-                    console.error('发生错误：', error);
-                    alert('服务器出错，请稍后重试');
+                    console.error('發生錯誤：', error);
+                    alert('發生錯誤，請稍後再試');
                 });
             });
         });
