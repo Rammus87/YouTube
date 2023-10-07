@@ -34,8 +34,12 @@
                      </div>
                      <div class="message-content">
                          <h2><%= message.title %></h2>
-                         <p><%= message.message %></p>
-                         <p><%= message.created_at %></p>
+                     </div>
+                     <div class="messagetext">
+                        <p><%= message.message %></p>
+                     </div>
+                     <div class="messagetime">
+                        <p><%= message.created_at %></p>
                      </div>
                      <ul>
                          <% comments.forEach(comment => { %>

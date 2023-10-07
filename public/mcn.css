@@ -101,26 +101,38 @@ a {
 }
 
 /* 卡片樣式 */
+.mcnlist {
+    height: 40vh;
+}
+
+
+.mcnheader img , .mcnheader div {
+    display: inline-block;
+}
+
 .mcnheader img{
     border-radius: 50%;
     height: 50px;
     width: 50px;
-    display: inline-block;
-    vertical-align: middle;
+    margin-right: 10px;
 }
 
 .mcnitem {
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    margin-bottom: 20px;
-    padding: 20px;
+    padding: 10px;
+    height: 90%;
 }
 
 .mcnheader h3 {
     color: #007BFF; 
 }
 
-.mcncontent .contenttext p {
-    line-height: 1.5; 
+.mcncontent {
+    height: 40%;
+}
+
+.time {
+    text-align: end;
 }

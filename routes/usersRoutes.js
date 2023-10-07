@@ -18,6 +18,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+
 router.get('/login',(req,res)=>{
     const username = req.session.user ? req.session.user.username : null;
     res.render('login',{ username });
@@ -55,22 +56,22 @@ router.get('/user/avatar/:username', (req, res) => {
 //登入頁面
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    console.log('接收到登录请求:', username, password);
+    console.log('接收到登入請求:', username, password);
 
     try {
         const [results, fields] = await connection.query('SELECT * FROM users WHERE username = ? AND password = ?', [username, password]);
 
         if (results.length > 0) {
             req.session.user = results[0];
-            console.log('用户已登录:', username);
-            res.json({ success: true, message: '登录成功' });
+            console.log('用户已登入:', username);
+            res.json({ success: true, message: '登入成功' });
         } else {
-            console.log('用户名或密码错误');
-            res.status(401).json({ success: false, message: '帐号或密码错误' });
+            console.log('帳號或密碼錯誤');
+            res.status(401).json({ success: false, message: '帳號或密碼錯誤' });
         }
     } catch (error) {
-        console.error('查询时出现错误：' + error);
-        res.status(500).json({ success: false, message: '服务器内部出现错误' });
+        console.error('查詢時出現錯誤：' + error);
+        res.status(500).json({ success: false, message: '服務器錯誤' });
     }
 });
 

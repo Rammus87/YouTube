@@ -43,15 +43,19 @@
                 <li class="mcnitem">
                     <div class="mcnheader">
                         <img src="/uploads/<%= project.avatar %>" alt="avatar">
-                        <h3><%= project.username %></h3>
+                        <div>
+                            <h3><%= project.username %></h3>
+                            <p class="small">位置: <%= project.location %></p>
+                        </div>
                     </div>
                     <div class="mcncontent">
-                            <p class="small">位置: <%= project.location %></p>
-                            <h2><%= project.title %></h2>
+                            <h3><%= project.title %></h3>
                             <div class="contenttext">
                                 <p><%= project.content %></p>
-                                <p class="time">時間:<%= (project.created_at) %></p>
-                            </div>
+                            </div>    
+                    </div>
+                    <div class="time">
+                        <p>時間:<%= (project.created_at) %></p>
                     </div>
                 </li>
             <% }); %>
